@@ -6,7 +6,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.microsoft.azure</groupId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.1-db-ca7dd36d</version>
   <artifactId>azure-parent</artifactId>
   <packaging>pom</packaging>
 
@@ -68,12 +68,15 @@
   </pluginRepositories>
 
   <distributionManagement>
+    <repository>
+      <id>aws-release</id>
+      <name>AWS Release Repository</name>
+      <url>s3://databricks-mvn/azure/release</url>
+    </repository>
     <snapshotRepository>
-      <id>ossrh</id>
-      <name>Sonatype Snapshots</name>
-      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-      <uniqueVersion>true</uniqueVersion>
-      <layout>default</layout>
+      <id>aws-snapshot</id>
+      <name>AWS Snapshot Repository</name>
+      <url>s3://databricks-mvn/azure/snapshot</url>
     </snapshotRepository>
   </distributionManagement>
 
@@ -147,6 +150,13 @@
   </dependencyManagement>
 
   <build>
+    <extensions>
+      <extension>
+        <groupId>org.springframework.build</groupId>
+        <artifactId>aws-maven</artifactId>
+        <version>5.0.0.RELEASE</version>
+      </extension>
+    </extensions>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -156,7 +166,7 @@
           <dependency>
             <groupId>com.microsoft.azure</groupId>
             <artifactId>autorest-build-tools</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>1.0.1-db-ca7dd36d</version>
           </dependency>
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
